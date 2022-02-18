@@ -1,0 +1,62 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk rootProject.compileSdk
+
+    defaultConfig {
+        minSdk rootProject.minSdk
+        targetSdk rootProject.minSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+dependencies {
+
+   api project(':baseModule')
+
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    def smartVersion = "2.0.3"
+    api  "com.scwang.smart:refresh-layout-kernel:$smartVersion"      //核心必须依赖
+    api  "com.scwang.smart:refresh-header-radar:$smartVersion"       //雷达刷新头
+
+    api rootProject.autoServiceVersion
+    kapt rootProject.autoServiceVersion
+
+    def accompanistVersion = "0.24.2-alpha"
+    api "com.google.accompanist:accompanist-pager:$accompanistVersion"
+//如果需要用指示器的话，请添加下方的依赖
+    api "com.google.accompanist:accompanist-pager-indicators:$accompanistVersion"
+
+    def aRouterVersion = "1.5.2"
+    api "com.alibaba:arouter-api:$aRouterVersion"
+    kapt  "com.alibaba:arouter-compiler:$aRouterVersion"
+}

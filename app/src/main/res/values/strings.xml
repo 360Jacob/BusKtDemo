@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BusKtDemo</string>
+    <string name="txt_main_page">首页</string>
+    <string name="txt_login">登录</string>
+</resources>
